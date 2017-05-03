@@ -6,7 +6,7 @@ mnist = input_data.read_data_sets(train_dir="MNIST_data/", one_hot=True)
 
 # Setup Placeholder
 x = tf.placeholder(tf.float32, [None, 784])  # Serialized Image Pixel Data
-y_ = tf.placeholder(tf.float32, [None, 10])  # Correct answers
+y_ = tf.placeholder(tf.float32, [None, 10])  # Predict answers
 W = tf.Variable(tf.zeros([784, 10]))  # Initial Weight
 b = tf.Variable(tf.zeros([10]))  # Initial Bias
 
