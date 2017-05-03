@@ -6,15 +6,16 @@ mnist = input_data.read_data_sets(train_dir="MNIST_data/", one_hot=True)
 
 # Setup Placeholder
 x = tf.placeholder(tf.float32, [None, 784])  # Serialized Image Pixel Data
+y_ = tf.placeholder(tf.float32, [None, 10])  # Correct answers
 W = tf.Variable(tf.zeros([784, 10]))  # Initial Weight
 b = tf.Variable(tf.zeros([10]))  # Initial Bias
 
-# Define output
+# Define output function
 y = tf.nn.softmax(tf.matmul(x, W) + b)
-# Define Temporal Output placeholder
-y_ = tf.placeholder(tf.float32, [None, 10])
-# Define cross-entropy
+# Define evaluate function
 cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_ * tf.log(y), reduction_indices=[1]))
+# cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_, logits=y))
+
 # Define Training parameters
 train_step = tf.train.GradientDescentOptimizer(0.5).minimize(cross_entropy)
 
